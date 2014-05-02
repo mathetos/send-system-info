@@ -64,4 +64,11 @@ This plugin displays WordPress, Server and Browser information, including fields
 * ACTIVE PLUGINS
 * NETWORK ACTIVE PLUGINS
 
+###Author###
+**John Regan** (johnregan3)
+<p>
+  <a href="https://github.com/johnregan3">GitHub</a><br>
+  <a href="http://profiles.wordpress.org/johnregan3/">WordPress.org</a><br>
+  <a href="http://twitter.com/johnregan3">Twitter</a>
+</p>
 
