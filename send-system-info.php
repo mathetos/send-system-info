@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Send System Info
- * Description: Displays System Info for debugging.  This info can be emailed, or displayed via unique URL to Support personnel.
+ * Description: Displays System Info for debugging.  This info can be emailed, or displayed via unique URL to support personnel.
  * Version: 0.1
  * Author: johnregan3
  * Author URI: http://johnregan3.me
@@ -33,70 +33,139 @@
  *
  * System Info textarea based on Easy Digital Downloads by Pippin Williamson.
  * http://easydigitaldownloads.com/
+ *
+ * @author John Regan
  */
 
-include( 'includes/browser.php' );
 include( 'includes/email.php' );
 include( 'includes/viewer.php' );
+include( 'includes/browser.php' );
 
 class Send_System_Info_Plugin {
 
-	//load actions, enqueue scripts
+	/**
+	 * Load hooks
+	 *
+	 * @since  1.0
+	 * @action plugins_loaded
+	 *
+	 * @return void
+	 */
 	static function setup() {
-		add_action( 'register_activation_hook', array( __CLASS__, 'generate_url' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
+		register_activation_hook( __FILE__, array( __CLASS__, 'generate_url' ) );
+		register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'register_submenu_page' ) );
 		add_action( 'wp_ajax_regenerate_url', array( __CLASS__, 'generate_url' ) );
-		add_action( 'template_redirect', array( 'Send_System_Info_Viewer', 'front_end_display' ) );
+		add_action( 'template_redirect', array( 'Send_System_Info_Viewer', 'remote_view' ) );
 	}
 
-	static function enqueue() {
-		wp_register_script( 'send-system-info-script', plugins_url( '/includes/send-system-info.js', __FILE__ ), array( 'jquery' ) );
-		wp_localize_script( 'send-system-info-script', 'systemInfoAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-		wp_enqueue_script( 'send-system-info-script' );
+
+	/**
+	 * Enqueues Javascripts
+	 *
+	 * @since  1.0
+	 * @action admin_print_scripts-
+	 *
+	 * @return void
+	 */
+	static function enqueue_js() {
+		wp_register_script( 'ssi-script', plugins_url( '/includes/send-system-info.js', __FILE__ ), array( 'jquery' ) );
+		wp_localize_script( 'ssi-script', 'systemInfoAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_enqueue_script( 'ssi-script' );
 	}
 
-	//Create Tools Submenu Page
+
+	/**
+	 * Enqueues CSS
+	 *
+	 * @since  1.0
+	 * @action admin_print_styles-
+	 *
+	 * @return void
+	 */
+	static function enqueue_css() {
+		wp_enqueue_style( 'ssi-style', plugins_url( '/includes/style.css', __FILE__ ) );
+	}
+
+
+	/**
+	 * Registers submenu page and enqueues styles and scripts
+	 *
+	 * @since  1.0
+	 * @action admin_menu
+	 *
+	 * @return void
+	 */
 	static function register_submenu_page() {
-		add_submenu_page( 'tools.php', __( 'System Info', 'send-system-info' ), __( 'Send System Info', 'send-system-info' ), 'manage_options', 'send-system-info', array( __CLASS__, 'render_page' ) );
+		$page = add_submenu_page(
+			'tools.php',
+			__( 'System Info', 'send-system-info' ),
+			__( 'Send System Info', 'send-system-info' ),
+			'manage_options',
+			'send-system-info',
+			array( __CLASS__, 'render_info' )
+		);
+
+		//Enqueue scripts and styles on the Plugin Settings page only
+		add_action( 'admin_print_styles-' . $page, array( __CLASS__, 'enqueue_css' ) );
+		add_action( 'admin_print_scripts-' . $page, array( __CLASS__, 'enqueue_js' ) );
 	}
 
-	//Render the page
-	static function render_page() {
+
+	/**
+	 * Renders plugin page title, information and info textarea
+	 *
+	 * @since  1.0
+	 *
+	 * @return void
+	 */
+	static function render_info() {
+
 		$email_sent = Send_System_Info_Email::send_email();
 		if ( $email_sent && 'sent' == $email_sent ) : ?>
 			<div id="message" class="updated"><p><?php _e( 'Email sent successfully.', 'send-system-info' ); ?></p></div>
 		<?php elseif ( $email_sent && 'error' == $email_sent ) : ?>
 			<div id="message" class="error"><p><?php _e( 'Error sending Email.', 'send-system-info' ); ?></p></div>
 		<?php endif; ?>
+
 		<div class="wrap">
-			<h2 style="margin-bottom: 1em;"><?php _e( 'Send System Info', 'send-system-info' ); ?></h2>
+			<?php // Form used to download .txt file ?>
+			<form action="<?php echo plugins_url( 'includes/download.php', __FILE__ ) //xss okay ?>" method="post" enctype="multipart/form-data" >
+				<h2 class="ssi-title"><?php _e( 'Send System Info', 'send-system-info' ); ?></h2>
 				<div id="templateside">
-					<?php do_action( '' ); ?>
-					<p style="margin-top: 0"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be sent via email using the from below.', '' ) ?></p>
-					<p style="margin-top: 0"><?php _e( 'Additionally, a URL can be given to your support provider to allow them to view this information at any time.  This access can be revoked by generating a new URL.', '' ) ?></p>
-					<?php do_action( '' ); ?>
+					<p class="instructions"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be sent via email using the from below.', '' ) ?></p>
+					<p class="instructions"><?php _e( 'Additionally, a URL can be given to your support provider to allow them to view this information at any time.  This access can be revoked by generating a new URL.', '' ) ?></p>
+					<input type="submit" class="button-secondary" value="<?php _e( 'Save as Text File', 'send-system-info' ) ?>" />
 				</div>
 				<div id="template">
-					<form action="<?php echo plugins_url( 'includes/textfile.php', __FILE__ ) ?>" method="post" enctype="multipart/form-data">
-						<div>
-							<textarea style="height: 500px; margin-bottom: 10px;" readonly="readonly" onclick="this.focus();this.select()" id="send-system-info-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
+					<div>
+						<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
+<?php //Non standard indentation needed for plain-text display ?>
 <?php self::display() ?>
-							</textarea>
-
-							<input type="submit" class="button-secondary" value="<?php _e( 'Save as Text File', 'send-system-info' ) ?>" />
-						</div>
-					</form>
-					<h3 style="margin-top: 3em;"><?php _e( 'Send via Email', 'send-system-info' ) ?></h3>
-					<?php Send_System_Info_Email::email_form() ?>
-					<h3 style="margin-top: 2em;"><?php _e( 'Remote Viewing', 'send-system-info' ) ?></h3>
-					<?php Send_System_Info_Viewer::remote_viewing() ?>
+						</textarea>
+					</div>
+				</form>
+				<h3 class="ssi-email-title"><?php _e( 'Send via Email', 'send-system-info' ) ?></h3>
+					<?php Send_System_Info_Email::email_form_section() ?>
+					<h3 class="ssi-remote-title"><?php _e( 'Remote Viewing', 'send-system-info' ) ?></h3>
+					<?php Send_System_Info_Viewer::remote_viewing_section() ?>
 				</div>
 		</div>
 	<?php
 
 	}
 
+
+	/**
+	 * Gathers data, then generates System Info
+	 *
+	 * Based on System Info sumbmenu page in Easy Digital Downloads
+	 * by Pippin Williamson
+	 *
+	 * @since  1.0
+	 *
+	 * @return void
+	 */
 	static function display( $return = false ) {
 
 		$browser = new Browser();
@@ -108,20 +177,20 @@ class Send_System_Info_Plugin {
 			$theme      = $theme_data->Name . ' ' . $theme_data->Version;
 		}
 
-			// Try to identifty the hosting provider
+		// Try to identifty the hosting provider
 		$host = false;
-		if( defined( 'WPE_APIKEY' ) ) {
+		if ( defined( 'WPE_APIKEY' ) ) {
 			$host = 'WP Engine';
-		} elseif( defined( 'PAGELYBIN' ) ) {
+		} elseif ( defined( 'PAGELYBIN' ) ) {
 			$host = 'Pagely';
 		}
 
 		$request['cmd'] = '_notify-validate';
 
 		$params = array(
-			'sslverify'		=> false,
-			'timeout'		=> 60,
-			'body'			=> $request,
+			'sslverify' => false,
+			'timeout'   => 60,
+			'body'      => $request,
 		);
 
 		$response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', $params );
@@ -132,18 +201,35 @@ class Send_System_Info_Plugin {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
 
-if ( $return ) {
-	return self::display_output( $browser, $theme_data, $theme, $host, $WP_REMOTE_POST );
-} else {
-	echo self::display_output( $browser, $theme_data, $theme, $host, $WP_REMOTE_POST );
-}
+		if ( $return ) {
+			return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST );
+		} else {
+			echo esc_html( self::display_output( $browser, $theme, $host, $WP_REMOTE_POST ) );
+		}
 	}
 
+
+	/**
+	 * Renders System Info
+	 * Non-standard indentation required for plain-text display
+	 *
+	 * Based on System Info sumbmenu page in Easy Digital Downloads
+	 * by Pippin Williamson
+	 *
+	 * @since  1.0
+	 *
+	 * @param   string  Browser information
+	 * @param   string  Theme Data
+	 * @param   string  Theme name
+	 * @param   string  Host
+	 * @param   string  WP Remote Host
+	 * @return  string  Output of System Info display
+	 */
 	//Render Info Display
-	static function display_output( $browser, $theme_data, $theme, $host, $WP_REMOTE_POST ) {
+	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST ) {
 		global $wpdb;
 		ob_start(); ?>
-// Generated by Send System Info Plugin //
+// Generated by the Send System Info Plugin //
 
 Multisite:                <?php echo is_multisite() ? 'Yes' . "\n" : 'No' . "\n" ?>
 
@@ -160,13 +246,13 @@ Host:                     <?php echo $host . "\n"; ?>
 Registered Post Stati:    <?php echo implode( ', ', get_post_stati() ) . "\n\n"; ?>
 <?php if ( isset( $_GET['systeminfo'] ) ) {
 	echo '// Browser of Current Viewer //';
-	echo '<br /><br />';
+	echo "\r\n\r\n";
 } ?>
 <?php echo $browser ; ?>
 <?php if ( isset( $_GET['systeminfo'] ) ) {
-	echo '<br />';
+	echo "\r\n";
 	echo '// End Browser of Current Viewer //';
-	echo '<br />';
+	echo "\r\n\r\n";
 } ?>
 
 PHP Version:              <?php echo PHP_VERSION . "\n"; ?>
@@ -186,7 +272,7 @@ PHP Allow URL File Open:  <?php echo ini_get( 'allow_url_fopen' ) ? "Yes" : "No\
 
 WP_DEBUG:                 <?php echo defined( 'WP_DEBUG' ) ? WP_DEBUG ? 'Enabled' . "\n" : 'Disabled' . "\n" : 'Not set' . "\n" ?>
 
-WP Table Prefix:          <?php echo "Length: ". strlen( $wpdb->prefix ); echo " Status:"; if ( strlen( $wpdb->prefix )>16 ) {echo " ERROR: Too Long";} else {echo " Acceptable";} echo "\n"; ?>
+WP Table Prefix:          <?php echo 'Length: ' . strlen( $wpdb->prefix ); echo ' Status:'; if ( strlen( $wpdb->prefix ) >16 ) { echo ' ERROR: Too Long'; } else { echo ' Acceptable'; } echo "\n"; ?>
 
 Show On Front:            <?php echo get_option( 'show_on_front' ) . "\n" ?>
 Page On Front:            <?php $id = get_option( 'page_on_front' ); echo get_the_title( $id ) . ' (#' . $id . ')' . "\n" ?>
@@ -240,36 +326,18 @@ if ( is_multisite() ) : ?>
 	}
 endif;
 
-	$output = ob_get_clean();
-
-	return $output;
-
-
+		$output = ob_get_clean();
+		return $output;
 }
-
-	static function generate_url() {
-		$alphabet    = 'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
-		$value       = array();
-		$alphaLength = strlen( $alphabet ) - 1;
-		for ( $i = 0; $i < 32; $i++ ) {
-			$n     = rand( 0, $alphaLength );
-			$value[] = $alphabet[$n];
-		}
-		$value = implode( $value );
-		update_option( 'system_info_remote_url', $value );
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			$output = home_url() . '/?systeminfo=' . $value;
-			wp_send_json( $output );
-		}
-	}
 
 
 	/**
 	 * Does Size Conversions
 	 *
 	 * @author Chris Christoff
+	 * @since 1.0
 	 *
-	 * @param unknown $v
+	 * @param  unknown    $v
 	 * @return int|string
 	 */
 	static function let_to_num( $v ) {
@@ -292,5 +360,44 @@ endif;
 	}
 
 
+	/**
+	 * Generates Random URL for the remote view.
+	 * Saves result to options.  If it's an ajax request
+	 * the new query value is sent back to the js script.
+	 *
+	 * @since  1.0
+	 * @action wp_ajax_regenerate_url
+	 *
+	 * @return void
+	 */
+	static function generate_url() {
+		$alphabet    = 'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
+		$value       = array();
+		$alphaLength = strlen( $alphabet ) - 1;
+		for ( $i = 0; $i < 32; $i++ ) {
+			$n     = rand( 0, $alphaLength );
+			$value[] = $alphabet[$n];
+		}
+		$value = implode( $value );
+		update_option( 'system_info_remote_url', $value );
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$output = home_url() . '/?systeminfo=' . $value;
+			wp_send_json( $output );
+		}
+	}
+
+
+	/**
+	 * Delete URL option on uninstall.
+	 *
+	 * @since 1.0
+	 *
+	 * @return void
+	 */
+	static function uninstall() {
+		delete_option( 'system_info_remote_url' );
+	}
+
 }
+//Load Plugin on 'plugins_loaded'
 add_action( 'plugins_loaded', array( 'Send_System_Info_Plugin', 'setup' ) );

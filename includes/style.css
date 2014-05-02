@@ -1,0 +1,34 @@
+/*
+ * Styles for Send System Info Plugin
+ */
+
+h2.ssi-title {
+	margin-bottom: 1em;
+}
+
+.instructions {
+	margin-top: 0;
+}
+
+#ssi-textarea {
+	height: 500px;
+	margin-bottom: 10px;
+}
+
+.ssi-email-form .description {
+	font-weight: normal;
+}
+
+#send-system-info-email-message.ssi-email-textarea {
+	width: 50%;
+	height: 200px;
+	margin-bottom: .5em;
+}
+
+.ssi-url {
+	font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.ssi-tiny {
+	font-size: .8em;
+}
