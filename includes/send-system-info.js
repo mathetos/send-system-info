@@ -1,8 +1,8 @@
 (function($) {
 	$( document ).ready( function() {
 		/**
-		 * Generates new Remote View URL
-		 * and displays it on the page
+		 * Generate new Remote View URL
+		 * and display it on the admin page
 		 */
 		$( 'input[name="generate-new-url"]' ).on( 'click', function( event ) {
 			event.preventDefault();

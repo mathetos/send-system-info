@@ -103,7 +103,8 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Register submenu page and enqueue styles and scripts
+	 * Register submenu page and enqueue styles and scripts.
+	 * Only viewable by Administrators
 	 *
 	 * @since  1.0
 	 * @action admin_menu
@@ -145,8 +146,8 @@ class Send_System_Info_Plugin {
 		<div class="wrap">
 			<h2 class="ssi-title"><?php _e( 'Send System Info', 'send-system-info' ); ?></h2>
 				<div id="templateside">
-					<p class="instructions"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be sent via email using the from below.', '' ) ?></p>
-					<p class="instructions"><?php _e( 'Additionally, a URL can be given to your support provider to allow them to view this information at any time.  This access can be revoked by generating a new URL.', '' ) ?></p>
+					<p class="instructions"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be sent via email using the from below.', 'send-system-info' ) ?></p>
+					<p class="instructions"><?php _e( 'Additionally, a URL can be given to your support provider to allow them to view this information at any time.  This access can be revoked by generating a new URL.', 'send-system-info' ) ?></p>
 				</div>
 				<div id="template">
 					<?php // Form used to download .txt file ?>
@@ -173,7 +174,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Gather data, then generates System Info
+	 * Gather data, then generate System Info
 	 *
 	 * Based on System Info sumbmenu page in Easy Digital Downloads
 	 * by Pippin Williamson
