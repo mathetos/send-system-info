@@ -44,7 +44,7 @@ class Send_System_Info_Email {
 						<p class="description"><?php _e( 'Your System Info will be attached automatically to this email form', 'send-system-info' ) ?>.</p>
 					</th>
 					<td>
-						<textarea class="ssi-email-textarea" name="send-system-info-email-message" id="send-system-info-email-message"></textarea>
+						<textarea class="ssi-email-textarea" name="send-system-info-email-message" id="send-system-info-email-message" placeholder="- System Info Message -"></textarea>
 					</td>
 				</tr>
 			</table>
