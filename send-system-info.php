@@ -58,8 +58,9 @@ class Send_System_Info_Plugin {
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( __CLASS__, 'action_link' ) );
 	}
 
+
 	/**
-	 * Print direct link to Send System Info page
+	 * Print direct link to Send System Info page from Plugins Page
 	 *
 	 * @since  1.0
 	 * @filter plugin_action_links_

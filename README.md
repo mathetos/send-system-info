@@ -1,4 +1,5 @@
-send-system-info
+Send System Info
 ================
 
-WordPress Plugin that allows admins to send their system information to support personnel.
+WordPress Plugin that displays System Info for debugging.  This info can be emailed and/or displayed to support personnel via unique URL.
+
