@@ -15,7 +15,7 @@ class Send_System_Info_Viewer {
 		$url   = home_url() . '/?systeminfo=' . $value;
 		?>
 		<p><?php _e( 'Users with this URL can view a plain-text version of your System Info.<br />Generating a new URL will void access to all who have the existing URL.', 'send-system-info' ) ?></p>
-		<p><span class="ssi-url ssi-url-text"><?php echo esc_url( $url ) ?></span>&nbsp;&nbsp;<a href="<?php echo esc_url( $url ) ?>" target="_blank" class="ssi-tiny ssi-url-text-link"><?php _e( 'test url', 'send-system-info' ) ?></a></p>
+		<p><input type="text" readonly="readonly" class="ssi-url ssi-url-text" onclick="this.focus();this.select()" value="<?php echo esc_url( $url ) ?>" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>" />&nbsp;&nbsp;<a href="<?php echo esc_url( $url ) ?>" target="_blank" class="ssi-tiny ssi-url-text-link"><?php _e( 'test url', 'send-system-info' ) ?></a></p>
 		<p class="submit">
 			<input type="submit" onClick="return false;" class="button-secondary" name="generate-new-url" value="<?php _e( 'Generate New URL', 'send-system-info' ) ?>" />
 		</p>

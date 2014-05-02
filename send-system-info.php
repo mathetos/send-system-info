@@ -139,7 +139,7 @@ class Send_System_Info_Plugin {
 				</div>
 				<div id="template">
 					<div>
-						<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
+						<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
 <?php //Non standard indentation needed for plain-text display ?>
 <?php self::display() ?>
 						</textarea>

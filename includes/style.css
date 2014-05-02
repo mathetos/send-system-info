@@ -27,6 +27,7 @@ h2.ssi-title {
 
 .ssi-url {
 	font-family: 'Consolas', 'Monaco', monospace;
+	width: 600px;
 }
 
 .ssi-tiny {

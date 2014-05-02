@@ -18,7 +18,7 @@ class Send_System_Info_Email {
 						<label for="send-system-info-email-address"><?php _e( 'Send To Email Address', 'send-system-info' ) ?>*</label>
 					</th>
 					<td>
-						<input type="email" name="send-system-info-email-address" id="send-system-info-email-address" />
+						<input type="email" name="send-system-info-email-address" id="send-system-info-email-address" placeholder="user@email.com" />
 					</td>
 				</tr>
 				<tr>
@@ -26,7 +26,7 @@ class Send_System_Info_Email {
 						<label for="send-system-info-email-subject"><?php _e( 'Subject', 'send-system-info' ) ?>*</label>
 					</th>
 					<td>
-						<input type="text" name="send-system-info-email-subject" id="send-system-info-email-subject" />
+						<input type="text" name="send-system-info-email-subject" id="send-system-info-email-subject" placeholder="Subject" />
 					</td>
 				</tr>
 				<tr>
