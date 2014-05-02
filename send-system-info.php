@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Send System Info
- * Description: Displays System Info for debugging.  This info can be emailed to support personnel.
+ * Description: Displays System Info for debugging.  This info can be emailed, or displayed via unique URL to Support personnel.
  * Version: 0.1
  * Author: johnregan3
  * Author URI: http://johnregan3.me
