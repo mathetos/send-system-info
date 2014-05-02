@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Handles Remote Viewing of System Info
+ *
+ * @package     SSI
+ * @subpackage  Classes/Email
+ * @author      John Regan
+ * @since       1.0
+ */
+
 class Send_System_Info_Email {
 
 	/**

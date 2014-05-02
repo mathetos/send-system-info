@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Send System Info
- * Description: Displays System Info for debugging.  This info can be emailed, or displayed via unique URL to support personnel.
- * Version: 0.1
+ * Description: Displays System Info for debugging.  This info can be emailed and/or displayed to support personnel via unique URL .
+ * Version: 1.0
  * Author: johnregan3
  * Author URI: http://johnregan3.me
  * License: GPLv2+
@@ -34,7 +34,9 @@
  * System Info textarea based on Easy Digital Downloads by Pippin Williamson.
  * http://easydigitaldownloads.com/
  *
- * @author John Regan
+ * @package SSI
+ * @author  John Regan
+ * @version 1.0
  */
 
 include( 'includes/email.php' );
@@ -61,7 +63,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Enqueues Javascripts
+	 * Enqueue Javascript
 	 *
 	 * @since  1.0
 	 * @action admin_print_scripts-
@@ -76,7 +78,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Enqueues CSS
+	 * Enqueue CSS
 	 *
 	 * @since  1.0
 	 * @action admin_print_styles-
@@ -89,7 +91,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Registers submenu page and enqueues styles and scripts
+	 * Register submenu page and enqueues styles and scripts
 	 *
 	 * @since  1.0
 	 * @action admin_menu
@@ -113,7 +115,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Renders plugin page title, information and info textarea
+	 * Render plugin page title, information and info textarea
 	 *
 	 * @since  1.0
 	 *
@@ -129,23 +131,25 @@ class Send_System_Info_Plugin {
 		<?php endif; ?>
 
 		<div class="wrap">
-			<?php // Form used to download .txt file ?>
-			<form action="<?php echo plugins_url( 'includes/download.php', __FILE__ ) //xss okay ?>" method="post" enctype="multipart/form-data" >
-				<h2 class="ssi-title"><?php _e( 'Send System Info', 'send-system-info' ); ?></h2>
+			<h2 class="ssi-title"><?php _e( 'Send System Info', 'send-system-info' ); ?></h2>
 				<div id="templateside">
 					<p class="instructions"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be sent via email using the from below.', '' ) ?></p>
 					<p class="instructions"><?php _e( 'Additionally, a URL can be given to your support provider to allow them to view this information at any time.  This access can be revoked by generating a new URL.', '' ) ?></p>
-					<input type="submit" class="button-secondary" value="<?php _e( 'Save as Text File', 'send-system-info' ) ?>" />
 				</div>
 				<div id="template">
-					<div>
-						<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
+					<?php // Form used to download .txt file ?>
+					<form action="<?php echo plugins_url( 'includes/download.php', __FILE__ ) //xss okay ?>" method="post" enctype="multipart/form-data" >
+						<div>
+							<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
 <?php //Non standard indentation needed for plain-text display ?>
 <?php self::display() ?>
-						</textarea>
-					</div>
-				</form>
-				<h3 class="ssi-email-title"><?php _e( 'Send via Email', 'send-system-info' ) ?></h3>
+							</textarea>
+						</div>
+						<p class="submit">
+							<input type="submit" class="button-secondary" value="<?php _e( 'Download Sytem Info as Text File', 'send-system-info' ) ?>" />
+						</p>
+					</form>
+					<h3 class="ssi-email-title"><?php _e( 'Send via Email', 'send-system-info' ) ?></h3>
 					<?php Send_System_Info_Email::email_form_section() ?>
 					<h3 class="ssi-remote-title"><?php _e( 'Remote Viewing', 'send-system-info' ) ?></h3>
 					<?php Send_System_Info_Viewer::remote_viewing_section() ?>
@@ -157,7 +161,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Gathers data, then generates System Info
+	 * Gather data, then generates System Info
 	 *
 	 * Based on System Info sumbmenu page in Easy Digital Downloads
 	 * by Pippin Williamson
@@ -210,7 +214,7 @@ class Send_System_Info_Plugin {
 
 
 	/**
-	 * Renders System Info
+	 * Render System Info
 	 * Non-standard indentation required for plain-text display
 	 *
 	 * Based on System Info sumbmenu page in Easy Digital Downloads
@@ -332,7 +336,7 @@ endif;
 
 
 	/**
-	 * Does Size Conversions
+	 * Size Conversions
 	 *
 	 * @author Chris Christoff
 	 * @since 1.0
@@ -361,7 +365,7 @@ endif;
 
 
 	/**
-	 * Generates Random URL for the remote view.
+	 * Generate Random URL for the remote view.
 	 * Saves result to options.  If it's an ajax request
 	 * the new query value is sent back to the js script.
 	 *

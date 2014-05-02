@@ -12,7 +12,6 @@ h2.ssi-title {
 
 #ssi-textarea {
 	height: 500px;
-	margin-bottom: 10px;
 }
 
 .ssi-email-form .description {
@@ -25,9 +24,10 @@ h2.ssi-title {
 	margin-bottom: .5em;
 }
 
-.ssi-url {
+input[type="text"].ssi-url {
 	font-family: 'Consolas', 'Monaco', monospace;
 	width: 600px;
+	color: #444;
 }
 
 .ssi-tiny {

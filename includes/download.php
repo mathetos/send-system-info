@@ -2,7 +2,10 @@
 /**
  * Generates Text file download
  *
- * @since  1.0
+ * @package     SSI
+ * @subpackage  Download
+ * @author      John Regan
+ * @since       1.0
  */
 
 if ( ! isset( $_POST['send-system-info-textarea'] ) || empty( $_POST['send-system-info-textarea'] ) ) {
