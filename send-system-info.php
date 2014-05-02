@@ -5,6 +5,33 @@
  * Version: 0.1
  * Author: johnregan3
  * Author URI: http://johnregan3.me
+ * License: GPLv2+
+ */
+
+/**
+ * Copyright (c) 2014 John Regan (http://johnregan3.com/)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License, version 2 or, at
+ * your discretion, any later version, as published by the Free
+ * Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ *
+ *
+ * Mad props to Matt Mullenweg for the original code
+ * and Chris Olbekson (c3mdigital) for the encouragement to
+ * puruse such a trivial pursuit.
+ *
+ * System Info textarea based on Easy Digital Downloads by Pippin Williamson.
+ * http://easydigitaldownloads.com/
  */
 
 include( 'includes/browser.php' );
@@ -122,18 +149,16 @@ Host:                     <?php echo $host . "\n"; ?>
 <?php endif; ?>
 
 Registered Post Stati:    <?php echo implode( ', ', get_post_stati() ) . "\n\n"; ?>
-
 <?php if ( isset( $_GET['systeminfo'] ) ) {
 	echo '// Browser of Current Viewer //';
+	echo '<br /><br />';
 } ?>
-
-
 <?php echo $browser ; ?>
-
 <?php if ( isset( $_GET['systeminfo'] ) ) {
+	echo '<br />';
 	echo '// End Browser of Current Viewer //';
+	echo '<br />';
 } ?>
-
 
 PHP Version:              <?php echo PHP_VERSION . "\n"; ?>
 MySQL Version:            <?php echo mysql_get_server_info() . "\n"; ?>
