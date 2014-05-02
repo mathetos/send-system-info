@@ -50,7 +50,7 @@ This plugin displays WordPress, Server and Browser information, including fields
 * Page On Front
 * Page For Posts
 * WP Remote Post
-* Session:
+* Session
 * Session Name
 * Cookie Path
 * Save Path
