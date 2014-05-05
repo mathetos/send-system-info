@@ -146,7 +146,7 @@ class Send_System_Info_Plugin {
 		<div class="wrap">
 			<h2 class="ssi-title"><?php _e( 'Send System Info', 'send-system-info' ); ?></h2>
 				<div id="templateside">
-					<p class="instructions"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be sent via email using the from below.', 'send-system-info' ) ?></p>
+					<p class="instructions"><?php _e( 'Send System Info displays data useful to support personnel.  This information can be dowloaded as a text file or sent via email using the from below.', 'send-system-info' ) ?></p>
 					<p class="instructions"><?php _e( 'Additionally, a URL can be given to your support provider to allow them to view this information at any time.  This access can be revoked by generating a new URL.  This link may be handy to use in support forums, as access to this information can be removed after you recieve the help you need.', 'send-system-info' ) ?></p>
 				</div>
 				<div id="template">
