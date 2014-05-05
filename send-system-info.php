@@ -47,8 +47,8 @@ class Send_System_Info_Plugin {
 	 */
 	static function setup() {
 		define( 'SSI_DIR', plugin_dir_path( __FILE__ ) );
-		define( 'SSI_INC_DIR', WP_STREAM_DIR . 'includes/' );
-		define( 'SSI_VIEWS_DIR', WP_STREAM_DIR . 'views/' );
+		define( 'SSI_INC_DIR', SSI_DIR . 'includes/' );
+		define( 'SSI_VIEWS_DIR', SSI_DIR . 'views/' );
 
 		require_once SSI_INC_DIR . 'email.php';
 		require_once SSI_INC_DIR . 'viewer.php';
