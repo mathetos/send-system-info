@@ -54,6 +54,7 @@ class Send_System_Info_Plugin {
 		register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'register_submenu_page' ) );
 		add_action( 'wp_ajax_regenerate_url', array( __CLASS__, 'generate_url' ) );
+		add_action( 'wp_ajax_download_system_info', array( __CLASS__, 'download_info' ) );
 		add_action( 'template_redirect', array( 'Send_System_Info_Viewer', 'remote_view' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( __CLASS__, 'action_link' ) );
 	}
@@ -143,6 +144,30 @@ class Send_System_Info_Plugin {
 			printf( '<div id="message" class="error"><p>%s</p></div>', __( 'Error sending Email.', 'send-system-info' ) );
 		}
 		include( 'views/send-system-info.php' );
+	}
+
+
+	/**
+	 * Generate Text file download
+	 *
+	 * @since  1.0
+	 *
+	 * @return void
+	 */
+	static function download_info() {
+
+		if ( ! isset( $_POST['send-system-info-textarea'] ) || empty( $_POST['send-system-info-textarea'] ) ) {
+			return;
+		}
+
+		header( 'Content-type: text/plain' );
+
+		//Text file name marked with Unix timestamp
+		header( 'Content-Disposition: attachment; filename=system_info_' . time() . '.txt' );
+
+		echo $_POST['send-system-info-textarea'];
+		die();
+
 	}
 
 

@@ -6,7 +6,8 @@
 		</div>
 		<div id="template">
 			<?php // Form used to download .txt file ?>
-			<form action="<?php echo plugins_url( 'includes/download.php', __FILE__ ) //xss okay ?>" method="post" enctype="multipart/form-data" >
+			<form action="<?php echo esc_url( self_admin_url( 'admin-ajax.php' ) ); ?>" method="post" enctype="multipart/form-data" >
+				<input type="hidden" name="action" value="download_system_info" />
 				<div>
 					<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
 <?php //Non standard indentation needed for plain-text display ?>
