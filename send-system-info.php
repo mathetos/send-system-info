@@ -59,7 +59,6 @@ class Send_System_Info_Plugin {
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( __CLASS__, 'action_link' ) );
 	}
 
-
 	/**
 	 * Print direct link to Send System Info page from Plugins Page
 	 *
@@ -73,7 +72,6 @@ class Send_System_Info_Plugin {
 		$links[] = '<a href="' . admin_url( 'tools.php?page=send-system-info.php' ) . '">' . __( 'View System Info', 'send-system-info' ) . '</a>';
 		return $links;
 	}
-
 
 	/**
 	 * Enqueue Javascript
@@ -89,7 +87,6 @@ class Send_System_Info_Plugin {
 		wp_enqueue_script( 'ssi-script' );
 	}
 
-
 	/**
 	 * Enqueue CSS
 	 *
@@ -101,7 +98,6 @@ class Send_System_Info_Plugin {
 	static function enqueue_css() {
 		wp_enqueue_style( 'ssi-style', plugins_url( '/includes/style.css', __FILE__ ) );
 	}
-
 
 	/**
 	 * Register submenu page and enqueue styles and scripts.
@@ -127,7 +123,6 @@ class Send_System_Info_Plugin {
 		add_action( 'admin_print_scripts-' . $page, array( __CLASS__, 'enqueue_js' ) );
 	}
 
-
 	/**
 	 * Render plugin page title, information and info textarea
 	 *
@@ -136,7 +131,6 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function render_info() {
-
 		$email_sent = Send_System_Info_Email::send_email();
 		if ( $email_sent && 'sent' == $email_sent ) {
 			printf( '<div id="message" class="updated"><p>%s</p></div>', __( 'Email sent successfully.', 'send-system-info' ) );
@@ -146,7 +140,6 @@ class Send_System_Info_Plugin {
 		include( 'views/send-system-info.php' );
 	}
 
-
 	/**
 	 * Generate Text file download
 	 *
@@ -155,7 +148,6 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function download_info() {
-
 		if ( ! isset( $_POST['send-system-info-textarea'] ) || empty( $_POST['send-system-info-textarea'] ) ) {
 			return;
 		}
@@ -167,9 +159,7 @@ class Send_System_Info_Plugin {
 
 		echo $_POST['send-system-info-textarea'];
 		die();
-
 	}
-
 
 	/**
 	 * Gather data, then generate System Info
@@ -182,7 +172,6 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function display( $return = false ) {
-
 		$browser = new Browser();
 		if ( get_bloginfo( 'version' ) < '3.4' ) {
 			$theme_data = get_theme_data( get_stylesheet_directory() . '/style.css' );
@@ -223,7 +212,6 @@ class Send_System_Info_Plugin {
 		}
 	}
 
-
 	/**
 	 * Render System Info
 	 *
@@ -245,8 +233,7 @@ class Send_System_Info_Plugin {
 		ob_start();
 		include( 'views/output.php' );
 		return ob_get_clean();
-}
-
+	}
 
 	/**
 	 * Size Conversions
@@ -276,7 +263,6 @@ class Send_System_Info_Plugin {
 		return $ret;
 	}
 
-
 	/**
 	 * Generate Random URL for the remote view.
 	 * Saves result to options.  If it's an ajax request
@@ -302,7 +288,6 @@ class Send_System_Info_Plugin {
 			wp_send_json( $output );
 		}
 	}
-
 
 	/**
 	 * Delete URL option on uninstall.

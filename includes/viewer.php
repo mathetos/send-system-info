@@ -10,7 +10,6 @@
 
 class Send_System_Info_Viewer {
 
-
 	/**
 	 * Renders Remote Viewing portion of Plugin Settings Page
 	 *
@@ -30,7 +29,6 @@ class Send_System_Info_Viewer {
 		<?php
 	}
 
-
 	/**
 	 * Renders Remote View using $_GET value
 	 *
@@ -40,7 +38,6 @@ class Send_System_Info_Viewer {
 	 * @return  void
 	 */
 	static function remote_view() {
-
 		if ( ! isset( $_GET['systeminfo'] ) || empty( $_GET['systeminfo'] ) ) {
 			return;
 		}

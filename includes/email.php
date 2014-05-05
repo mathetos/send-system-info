@@ -53,7 +53,6 @@ class Send_System_Info_Email {
 		<?php
 	}
 
-
 	/**
 	 * Sends plain-text email, inserting the System Info
 	 *
