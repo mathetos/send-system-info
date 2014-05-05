@@ -35,10 +35,6 @@
  * @version 1.0
  */
 
-include( 'includes/email.php' );
-include( 'includes/viewer.php' );
-include( 'includes/browser.php' );
-
 class Send_System_Info_Plugin {
 
 	/**
@@ -50,6 +46,14 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function setup() {
+		define( 'SSI_DIR', plugin_dir_path( __FILE__ ) );
+		define( 'SSI_INC_DIR', WP_STREAM_DIR . 'includes/' );
+		define( 'SSI_VIEWS_DIR', WP_STREAM_DIR . 'views/' );
+
+		require_once SSI_INC_DIR . 'email.php';
+		require_once SSI_INC_DIR . 'viewer.php';
+		require_once SSI_INC_DIR . 'browser.php';
+
 		register_activation_hook( __FILE__, array( __CLASS__, 'generate_url' ) );
 		register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'register_submenu_page' ) );
@@ -137,7 +141,7 @@ class Send_System_Info_Plugin {
 		} elseif ( $email_sent && 'error' == $email_sent ) {
 			printf( '<div id="message" class="error"><p>%s</p></div>', __( 'Error sending Email.', 'send-system-info' ) );
 		}
-		include( 'views/send-system-info.php' );
+		include( SSI_VIEWS_DIR . 'send-system-info.php' );
 	}
 
 	/**
@@ -231,7 +235,7 @@ class Send_System_Info_Plugin {
 	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST ) {
 		global $wpdb;
 		ob_start();
-		include( 'views/output.php' );
+		include( SSI_VIEWS_DIR . 'output.php' );
 		return ob_get_clean();
 	}
 
