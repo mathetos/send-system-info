@@ -82,7 +82,7 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function enqueue_js() {
-		wp_register_script( 'ssi-script', plugins_url( '/includes/send-system-info.js', __FILE__ ), array( 'jquery' ) );
+		wp_register_script( 'ssi-script', plugins_url( '/ui/send-system-info.js', __FILE__ ), array( 'jquery' ) );
 		wp_localize_script( 'ssi-script', 'systemInfoAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'ssi-script' );
 	}
@@ -96,7 +96,7 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function enqueue_css() {
-		wp_enqueue_style( 'ssi-style', plugins_url( '/includes/style.css', __FILE__ ) );
+		wp_enqueue_style( 'ssi-style', plugins_url( '/ui/send-system-info.css', __FILE__ ) );
 	}
 
 	/**
