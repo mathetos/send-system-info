@@ -75,6 +75,6 @@ Installs the same as any other WordPress Plugin.  Its administration screen can 
 * <a href="http://profiles.wordpress.org/johnregan3/">WordPress.org</a><br>
 * <a href="http://twitter.com/johnregan3">Twitter</a>
 
-System Info textarea based on Easy Digital Downloads by Pippin Williamson: http://easydigitaldownloads.com/  Used with permission.
+System Info textarea based on Easy Digital Downloads by Pippin Williamson: http://easydigitaldownloads.com/  Used with permission.  Pippin is not associate with this plugin in any way.
 
 
