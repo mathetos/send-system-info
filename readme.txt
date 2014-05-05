@@ -85,6 +85,8 @@ Install Send System Info just as you would any other WP Plugin:
 
 [More help installing Plugins](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins "WordPress Codex: Installing Plugins")
 
+After installation and activation, this plugin's administration screen can be found under Tools > Send System Info.
+
 == Screenshots ==
 
 1. The Send System Info Administration Screen

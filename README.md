@@ -5,12 +5,16 @@ Send System Info is a handy WordPress plugin that displays System Information fo
 
 This plugin displays WordPress, Server and Browser information, including fields like PHP version, active plugins, current browser, etc.  It also tests for FSOCKOPEN, cURL, SOAP client, as well as <a href="#full-list">many other features</a>.
 
-**Features**
+**Plugin Features**
 
 * Send System Info via email
 * Download System Info as .txt file
 * Option to allow remote viewing of System Information
 * Multisite Support
+
+## Installation ##
+
+Installs the same as any other WordPress Plugin.  Its administration screen can be found under Tools > Send System Info.
 
 
 ## Screenshot ##
