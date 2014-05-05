@@ -29,6 +29,7 @@
  *
  * System Info textarea based on Easy Digital Downloads by Pippin Williamson.
  * http://easydigitaldownloads.com/
+ * Used with permission.
  *
  * @package SSI
  * @author  John Regan
