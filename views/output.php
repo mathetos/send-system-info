@@ -25,7 +25,7 @@ Registered Post Stati:    <?php echo implode( ', ', get_post_stati() ) . "\n\n";
 } ?>
 
 PHP Version:              <?php echo PHP_VERSION . "\n"; ?>
-MySQL Version:            <?php echo $mysql_ver . "\n"; ?>
+MySQL Version:            <?php echo mysqli_get_server_info( $wpdb->dbh ) . "\n"; ?>
 Web Server Info:          <?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?>
 
 WordPress Memory Limit:   <?php echo ( self::let_to_num( WP_MEMORY_LIMIT )/( 1024 ) )."MB"; ?><?php echo "\n"; ?>

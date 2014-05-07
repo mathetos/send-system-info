@@ -210,31 +210,10 @@ class Send_System_Info_Plugin {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
 
-		if ( version_compare( phpversion(), '5.5', '<' ) ) {
-			$mysql_ver = mysql_get_server_info();
-		} else {
-			/**
-			 * http://www.php.net/manual/en/function.mysql-get-server-info.php#83258
-			 * This is ugly and I don't like it.
-			 * Need to find a good way to get the MySQL version in PHP 5.5+
-			 * without requiring a link (like mysqli_get_server_info() does).
-			 *
-			 * Any takers?
-			 * https://github.com/johnregan3/send-system-info/pulls
-			 */
-			ob_start();
-			phpinfo( INFO_MODULES );
-			$info = ob_get_contents();
-			ob_end_clean();
-			$info = stristr( $info, 'Client API version' );
-			preg_match( '/[1-9].[0-9].[1-9][0-9]/', $info, $match );
-			$mysql_ver = $match[0];
-		}
-
 		if ( $return ) {
-			return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver );
+			return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST );
 		} else {
-			echo esc_html( self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver ) );
+			echo esc_html( self::display_output( $browser, $theme, $host, $WP_REMOTE_POST ) );
 		}
 	}
 
@@ -254,7 +233,7 @@ class Send_System_Info_Plugin {
 	 * @return  string  Output of System Info display
 	 */
 	//Render Info Display
-	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver ) {
+	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST ) {
 		global $wpdb;
 		ob_start();
 		include( SSI_VIEWS_DIR . 'output.php' );
