@@ -210,7 +210,6 @@ class Send_System_Info_Plugin {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
 
-		$php_ver = phpversion( 'tidy' );
 		if ( version_compare( phpversion(), '5.5', '<' ) ) {
 			$mysql_ver = mysql_get_server_info();
 		} else {
