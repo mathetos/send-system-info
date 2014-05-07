@@ -211,7 +211,7 @@ class Send_System_Info_Plugin {
 		}
 
 		$php_ver = phpversion( 'tidy' );
-		if ( version_compare( phpversion(), '5.5', '>' ) ) {
+		if ( version_compare( phpversion(), '5.5', '<' ) ) {
 			$mysql_ver = mysql_get_server_info();
 		} else {
 			/**
