@@ -47,7 +47,7 @@ class Send_System_Info_Viewer {
 
 		echo '<pre>';
 		if ( $query_value == $value ) {
-			Send_System_Info_Plugin::display();
+			echo Send_System_Info_Plugin::display();
 			exit();
 		} else {
 			exit( 'Invalid System Info URL.' );

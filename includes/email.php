@@ -62,7 +62,7 @@ class Send_System_Info_Email {
 			);
 
 			// Insert System Info into email
-			$message .= "\r\n\r\n---------------\r\n\r\n" . Send_System_Info_Plugin::display( true );
+			$message .= "\r\n\r\n---------------\r\n\r\n" . Send_System_Info_Plugin::display();
 
 			$sent = wp_mail( $address, $subject, $message, $headers );
 
