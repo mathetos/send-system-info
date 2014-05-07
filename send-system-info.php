@@ -218,7 +218,7 @@ class Send_System_Info_Plugin {
 			 * http://www.php.net/manual/en/function.mysql-get-server-info.php#83258
 			 * This is ugly and I don't like it.
 			 * Need to find a good way to get the MySQL version in PHP 5.5+
-			 * without establishing a link (like mysqli_get_server_info() does).
+			 * without requiring a link (like mysqli_get_server_info() does).
 			 */
 			ob_start();
 			phpinfo( INFO_MODULES );
