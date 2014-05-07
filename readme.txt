@@ -70,6 +70,10 @@ This plugin displays WordPress, Server and Browser information, including fields
 * ACTIVE PLUGINS
 * NETWORK ACTIVE PLUGINS
 
+**Contribute to Send System Info**
+
+[Send System Info on GitHub](https://github.com/johnregan3/send-system-info "Send System Info on GitHub")
+
 == Installation ==
 
 Install Send System Info just as you would any other WP Plugin:
