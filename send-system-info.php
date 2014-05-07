@@ -220,7 +220,7 @@ class Send_System_Info_Plugin {
 			 * without requiring a link (like mysqli_get_server_info() does).
 			 *
 			 * Any takers?
-			 * https://github.com/johnregan3/send-system-info/issues
+			 * https://github.com/johnregan3/send-system-info/pulls
 			 */
 			ob_start();
 			phpinfo( INFO_MODULES );
