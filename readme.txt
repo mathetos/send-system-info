@@ -90,7 +90,7 @@ After installation and activation, this plugin's administration screen can be fo
 
 == Screenshots ==
 
-1. The Send System Info Administration Screen
+1. The Send System Info Administration Screen (Tools > Send System Info)
 
 == Changelog ==
 
