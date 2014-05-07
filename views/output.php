@@ -13,19 +13,19 @@ Host:                     <?php echo $host . "\n"; ?>
 <?php endif; ?>
 
 Registered Post Stati:    <?php echo implode( ', ', get_post_stati() ) . "\n\n"; ?>
-<?php if ( isset( $_GET['systeminfo'] ) ) {
+<?php if ( isset( $_GET['system_info'] ) ) {
 	echo '// Browser of Current Viewer //';
 	echo "\r\n\r\n";
 } ?>
 <?php echo $browser ; ?>
-<?php if ( isset( $_GET['systeminfo'] ) ) {
+<?php if ( isset( $_GET['system_info'] ) ) {
 	echo "\r\n";
 	echo '// End Browser of Current Viewer //';
 	echo "\r\n\r\n";
 } ?>
 
 PHP Version:              <?php echo PHP_VERSION . "\n"; ?>
-MySQL Version:            <?php echo mysql_get_server_info() . "\n"; ?>
+MySQL Version:            <?php echo $mysql_ver . "\n"; ?>
 Web Server Info:          <?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?>
 
 WordPress Memory Limit:   <?php echo ( self::let_to_num( WP_MEMORY_LIMIT )/( 1024 ) )."MB"; ?><?php echo "\n"; ?>

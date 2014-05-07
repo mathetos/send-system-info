@@ -7,6 +7,7 @@ This plugin displays WordPress, Server and Browser information, including fields
 
 **Plugin Features**
 
+* Quickly and easily presents a snapshot of the user's site configuration
 * Send System Info via email
 * Download System Info as .txt file
 * Option to allow remote viewing of System Information
@@ -15,7 +16,6 @@ This plugin displays WordPress, Server and Browser information, including fields
 ## Installation ##
 
 Installs the same as any other WordPress Plugin.  Its administration screen can be found under Tools > Send System Info.
-
 
 ## Screenshot ##
 
@@ -75,4 +75,7 @@ Installs the same as any other WordPress Plugin.  Its administration screen can 
 * <a href="http://profiles.wordpress.org/johnregan3/">WordPress.org</a><br>
 * <a href="http://twitter.com/johnregan3">Twitter</a>
 
+###Contributors###
+* **Luke Carbis** (lukecarbis)
 
+System Info textarea based on Easy Digital Downloads by Pippin Williamson: http://easydigitaldownloads.com/  Used with permission.  Pippin is not associated with this plugin in any way.
