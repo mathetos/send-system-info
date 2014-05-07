@@ -186,7 +186,7 @@ class Send_System_Info_Plugin {
 			$theme      = $theme_data->Name . ' ' . $theme_data->Version;
 		}
 
-		// Try to identifty the hosting provider
+		// Try to identify the hosting provider
 		$host = false;
 		if ( defined( 'WPE_APIKEY' ) ) {
 			$host = 'WP Engine';
@@ -210,10 +210,17 @@ class Send_System_Info_Plugin {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
 
-		if ( $return ) {
-			return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST );
+		$php_ver = phpversion( 'tidy' );
+		if ( 5.5 > $php_ver ) {
+			$msql_ver = mysql_get_server_info();
 		} else {
-			echo esc_html( self::display_output( $browser, $theme, $host, $WP_REMOTE_POST ) );
+			$msql_ver = mysqli_get_server_info();
+		}
+
+		if ( $return ) {
+			return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $msql_ver );
+		} else {
+			echo esc_html( self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $msql_ver ) );
 		}
 	}
 
@@ -233,7 +240,7 @@ class Send_System_Info_Plugin {
 	 * @return  string  Output of System Info display
 	 */
 	//Render Info Display
-	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST ) {
+	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST, $msql_ver ) {
 		global $wpdb;
 		ob_start();
 		include( SSI_VIEWS_DIR . 'output.php' );
