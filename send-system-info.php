@@ -176,7 +176,7 @@ class Send_System_Info_Plugin {
 	 *
 	 * @return void
 	 */
-	static function display( $return = false ) {
+	static function display() {
 		$browser = new Browser();
 		if ( get_bloginfo( 'version' ) < '3.4' ) {
 			$theme_data = get_theme_data( get_stylesheet_directory() . '/style.css' );
@@ -231,11 +231,7 @@ class Send_System_Info_Plugin {
 			$mysql_ver = $match[0];
 		}
 
-		if ( $return ) {
-			return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver );
-		} else {
-			echo esc_html( self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver ) );
-		}
+		return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver );
 	}
 
 	/**
