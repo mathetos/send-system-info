@@ -77,5 +77,6 @@ Installs the same as any other WordPress Plugin.  Its administration screen can 
 
 ###Contributors###
 * **Luke Carbis** (lukecarbis)
+* System Info textarea used with permission from Easy Digital Downloads by Pippin Williamson
 
 System Info textarea based on Easy Digital Downloads by Pippin Williamson: http://easydigitaldownloads.com/  Used with permission.  Pippin is not associated with this plugin in any way.
