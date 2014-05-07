@@ -3,7 +3,7 @@
  * Plugin Name: Send System Info
  * Plugin URI: http://johnregan3.github.io/send-system-info
  * Description: Displays System Info for debugging.  This info can be emailed and/or displayed to support personnel via unique URL.
- * Version: 1.0
+ * Version: 1.1
  * Author: johnregan3
  * Author URI: http://johnregan3.me
  * License: GPLv2+
