@@ -33,7 +33,7 @@
  *
  * @package SSI
  * @author  John Regan
- * @version 1.0
+ * @version 1.1
  */
 
 class Send_System_Info_Plugin {
