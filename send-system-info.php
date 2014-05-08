@@ -33,7 +33,7 @@
  *
  * @package SSI
  * @author  John Regan
- * @version 1.0
+ * @version 1.1
  */
 
 class Send_System_Info_Plugin {
@@ -177,6 +177,8 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function display() {
+		global $wpdb;
+
 		$browser = new Browser();
 		if ( get_bloginfo( 'version' ) < '3.4' ) {
 			$theme_data = get_theme_data( get_stylesheet_directory() . '/style.css' );
@@ -210,26 +212,14 @@ class Send_System_Info_Plugin {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
 
-		if ( version_compare( phpversion(), '5.5', '<' ) ) {
-			$mysql_ver = mysql_get_server_info();
+
+		$connection = mysqli_connect( $wpdb->dbhost, $wpdb->dbuser, $wpdb->dbpassword, $wpdb->dbname );
+		if ( mysqli_connect_errno() ) {
+			$mysql_ver = 'Error connecting to MySQL: ' . mysqli_connect_errno();
 		} else {
-			/**
-			 * http://www.php.net/manual/en/function.mysql-get-server-info.php#83258
-			 * This is ugly and I don't like it.
-			 * Need to find a good way to get the MySQL version in PHP 5.5+
-			 * without requiring a link (like mysqli_get_server_info() does).
-			 *
-			 * Any takers?
-			 * https://github.com/johnregan3/send-system-info/pulls
-			 */
-			ob_start();
-			phpinfo( INFO_MODULES );
-			$info = ob_get_contents();
-			ob_end_clean();
-			$info = stristr( $info, 'Client API version' );
-			preg_match( '/[1-9].[0-9].[1-9][0-9]/', $info, $match );
-			$mysql_ver = $match[0];
+			$mysql_ver = mysqli_get_server_info( $connection );
 		}
+		mysqli_close( $connection );
 
 		return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver );
 	}
