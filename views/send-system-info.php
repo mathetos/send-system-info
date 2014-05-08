@@ -11,7 +11,7 @@
 				<div>
 					<textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
 <?php //Non standard indentation needed for plain-text display ?>
-<?php echo self::display() ?>
+<?php echo esc_html( self::display() ) ?>
 					</textarea>
 				</div>
 				<p class="submit">
