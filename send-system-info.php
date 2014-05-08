@@ -212,17 +212,14 @@ class Send_System_Info_Plugin {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
 
-		if ( version_compare( phpversion(), '5.5', '<' ) ) {
-			$mysql_ver = mysql_get_server_info();
+
+		$connection = mysqli_connect( $wpdb->dbhost, $wpdb->dbuser, $wpdb->dbpassword, $wpdb->dbname );
+		if ( mysqli_connect_errno() ) {
+			$mysql_ver = 'Error connecting to MySQL: ' . mysqli_connect_errno();
 		} else {
-			$connection = mysqli_connect( $wpdb->dbhost, $wpdb->dbuser, $wpdb->dbpassword, $wpdb->dbname );
-			if ( mysqli_connect_errno() ) {
-				$mysql_ver = 'Error connecting to MySQL: ' . mysqli_connect_errno();
-			} else {
-				$mysql_ver = mysqli_get_server_info( $connection );
-			}
-			mysqli_close( $connection );
+			$mysql_ver = mysqli_get_server_info( $connection );
 		}
+		mysqli_close( $connection );
 
 		return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST, $mysql_ver );
 	}
