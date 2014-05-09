@@ -285,7 +285,7 @@ class Send_System_Info_Plugin {
 		$value = implode( $value );
 		update_option( 'system_info_remote_url', $value );
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			$output = home_url() . '/?systeminfo=' . $value;
+			$output = home_url() . '/?system_info=' . $value;
 			wp_send_json( $output );
 		}
 	}
