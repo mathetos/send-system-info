@@ -98,10 +98,18 @@ After installation and activation, this plugin's administration screen can be fo
 
 == Changelog ==
 
+= 1.1 =
+* Updating method for determining MySQL version
+* Minor Bugfixes
+
 = 1.0 =
 * Inital Release
 
 == Upgrade Notice ==
+
+= 1.1 =
+* Updating method for determining MySQL version
+* Minor Bugfixes
 
 = 1.0 =
 * Inital Release
