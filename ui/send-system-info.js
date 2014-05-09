@@ -16,7 +16,7 @@
 					$( '.ssi-url-text-link' ).attr( 'href', response );
 				},
 				error : function( j, t, e ) {
-					console.log( j.responseText );
+					console.log( "Send System Info Error: " + j.responseText );
 				}
 			});
 		});
