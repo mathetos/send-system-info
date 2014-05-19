@@ -101,3 +101,8 @@ NETWORK ACTIVE PLUGINS:
 echo $plugin['Name'] . ' :' . $plugin['Version'] ."\n";
 	}
 endif;
+
+if ( has_action( 'ssi_extra_info' ) ) {
+	echo "\n";
+	do_action( 'ssi_extra_info' );
+}
