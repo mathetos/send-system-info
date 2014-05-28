@@ -19,7 +19,21 @@ class Send_System_Info_Email {
 	 * @return void
 	 */
 	static function email_form_section() {
-		include( SSI_VIEWS_DIR . 'email-form.php' );
+		$path = SSI_VIEWS_DIR . 'email-form.php';
+
+		/**
+		 * Change the path for the email form.
+		 *
+		 * Use this to replace the default email form (views/email.php) with a custom view.
+		 *
+		 * @since	1.1.0
+		 *
+		 * @param 	string	$path 	Path to custom view.
+		 * @return	string			Path to output view.
+		 */
+		$path = apply_filters( 'ssi_view_path_output', $path );
+
+		include( $path );
 	}
 
 	/**
