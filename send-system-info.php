@@ -142,7 +142,21 @@ class Send_System_Info_Plugin {
 		} elseif ( $email_sent && 'error' == $email_sent ) {
 			printf( '<div id="message" class="error"><p>%s</p></div>', __( 'Error sending Email.', 'send-system-info' ) );
 		}
-		include( SSI_VIEWS_DIR . 'send-system-info.php' );
+
+		$path = SSI_VIEWS_DIR . 'send-system-info.php';
+
+		/**
+		 * Change the path for the send system info view.
+		 *
+		 * Use this to replace the default form for sending the system info (views/send-system-info.php) with a custom view.
+		 *
+		 * @since	1.1.0
+		 *
+		 * @param 	string	$path 	Path to custom view.
+		 * @return	string			Path to output view.
+		 */
+		$path = apply_filters( 'ssi_view_path_send_system_info', $path );
+		include( $path );
 	}
 
 	/**
@@ -232,7 +246,21 @@ class Send_System_Info_Plugin {
 	static function display_output( $browser, $theme, $host, $WP_REMOTE_POST ) {
 		global $wpdb;
 		ob_start();
-		include( SSI_VIEWS_DIR . 'output.php' );
+		$path = SSI_VIEWS_DIR . 'output.php';
+
+		/**
+		 * Change the path for the output view.
+		 *
+		 * Use this to replace the default admin page for this plugin (views/output.php) with a custom view.
+		 *
+		 * @since	1.1.0
+		 *
+		 * @param 	string	$path 	Path to custom view.
+		 * @return	string			Path to output view.
+		 */
+		$path = apply_filters( 'ssi_view_path_output', $path );
+
+		include( $path );
 		return ob_get_clean();
 	}
 
