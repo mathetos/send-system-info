@@ -59,6 +59,7 @@ class Send_System_Info_Plugin {
 		register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'register_submenu_page' ) );
 		add_action( 'wp_ajax_regenerate_url', array( __CLASS__, 'generate_url' ) );
+		add_action( 'wp_ajax_delete_ssi_url', array( __CLASS__, 'delete_ssi_url' ) );
 		add_action( 'wp_ajax_download_system_info', array( __CLASS__, 'download_info' ) );
 		add_action( 'template_redirect', array( 'Send_System_Info_Viewer', 'remote_view' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( __CLASS__, 'action_link' ) );
@@ -87,7 +88,7 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function enqueue_js() {
-		wp_register_script( 'ssi-script', plugins_url( '/ui/send-system-info.js', __FILE__ ), array( 'jquery' ) );
+		wp_register_script( 'ssi-script', plugins_url( '/ui/send-system-info.js', __FILE__ ), array( 'jquery'), mt_rand(), false );
 		wp_localize_script( 'ssi-script', 'systemInfoAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'ssi-script' );
 	}
@@ -316,6 +317,22 @@ class Send_System_Info_Plugin {
 			$output = home_url() . '/?system_info=' . $value;
 			wp_send_json( $output );
 		}
+	}
+
+	/**
+	 * Delete SSI Generated URL action.
+	 *
+	 * @since 1.0
+	 *
+	 * @return void
+	 */
+
+	static function delete_ssi_url() {
+		$ssi_url_option = get_option('system_info_remote_url');
+
+		//if ( !empty($ssi_url_option)) {
+			delete_option( 'system_info_remote_url' );
+		//}
 	}
 
 	/**
