@@ -3,7 +3,7 @@
  * Plugin Name: Send System Info
  * Plugin URI: https://www.mattcromwell.com
  * Description: Displays System Info for debugging.  This info can be emailed and/or displayed to support personnel via unique URL.
- * Version: 1.2
+ * Version: 1.3
  * Author: Matt Cromwell
  * Author URI: https://www.mattcromwell.com
  * License: GPLv2+
@@ -32,8 +32,8 @@
  * Used with permission.
  *
  * @package SSI
- * @author  John Regan
- * @version 1.1
+ * @author  Matt Cromwell
+ * @version 1.3
  */
 
 class Send_System_Info_Plugin {
@@ -328,11 +328,9 @@ class Send_System_Info_Plugin {
 	 */
 
 	static function delete_ssi_url() {
-		$ssi_url_option = get_option('system_info_remote_url');
 
-		//if ( !empty($ssi_url_option)) {
-			delete_option( 'system_info_remote_url' );
-		//}
+		delete_option( 'system_info_remote_url' );
+
 	}
 
 	/**

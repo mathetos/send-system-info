@@ -72,7 +72,7 @@ This plugin displays WordPress, Server and Browser information, including fields
 
 **Contribute to Send System Info**
 
-[Send System Info on GitHub](https://github.com/johnregan3/send-system-info "Send System Info on GitHub")
+[Send System Info on GitHub](https://github.com/mathetos/send-system-info "Send System Info on GitHub")
 
 == Installation ==
 
@@ -94,9 +94,17 @@ After installation and activation, this plugin's administration screen can be fo
 
 == Screenshots ==
 
-1. The Send System Info Administration Screen (Tools > Send System Info)
+1. The Send System Info "Send as Text" Screen (Tools > Send System Info)
+2. The "Send as Email" screen (Tools > Send System Info > Send as Email)
+3. The "Send as URL" Screen and the actions available (Tools > Send System Info > Send as URL)
 
 == Changelog ==
+
+= 1.3 (October 11, 2017) =
+* ADOPTION DAY: [Matt Cromwell](https://www.mattcromwell.com) has officially adopted Send System Info and will be maintaining it and developing it further. See [issues on Github](https://github.com/mathetos/send-system-info/issues) to contribute.
+* NEW: New tabbed interface and general UI clean-up ([Issue #10](https://github.com/mathetos/send-system-info/issues/10))
+* NEW: Delete the generated URL with a click of a button ([Issue #14](https://github.com/mathetos/send-system-info/issues/14))
+* NEW: Added filters to paths for view for plugin authors to extend the views. Thanks Josh! ([PR #7](https://github.com/mathetos/send-system-info/pull/7))
 
 = 1.1 =
 * Updating method for determining MySQL version

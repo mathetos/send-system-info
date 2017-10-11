@@ -19,7 +19,7 @@ Installs the same as any other WordPress Plugin.  Its administration screen can 
 
 ## Screenshot ##
 
-![Send System Info Screenshot](https://raw.githubusercontent.com/johnregan3/send-system-info/master/assets/SSI.jpg)
+![Send System Info Screenshot](https://raw.githubusercontent.com/mathetos/send-system-info/master/assets/SSI.jpg)
 
 <a name="full-list"></a>
 **Full List of Information Displayed**
@@ -68,14 +68,13 @@ Installs the same as any other WordPress Plugin.  Its administration screen can 
 * ACTIVE PLUGINS
 * NETWORK ACTIVE PLUGINS
 
-###Author###
-**John Regan** (johnregan3)
+###Author
+**Matt Cromwell** (@mathetos)
 
-* <a href="https://github.com/johnregan3">GitHub</a><br>
-* <a href="http://profiles.wordpress.org/johnregan3/">WordPress.org</a><br>
-* <a href="http://twitter.com/johnregan3">Twitter</a>
+* <a href="https://github.com/matehtos">GitHub</a><br>
+* <a href="http://profiles.wordpress.org/webdevmattcrom/">WordPress.org</a><br>
+* <a href="http://twitter.com/learnwithmattc">Twitter</a>
 
-###Contributors###
-* **Luke Carbis** (lukecarbis)
+###Special Thanks
 
 System Info textarea based on Easy Digital Downloads by Pippin Williamson: http://easydigitaldownloads.com/  Used with permission.  Pippin is not associated with this plugin in any way.
