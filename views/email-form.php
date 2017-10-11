@@ -1,3 +1,7 @@
+<header>
+    <h3 class="ssi-email-title"><?php _e( 'Send via Email', 'send-system-info' ) ?></h3>
+    <p><?php echo __('Use this form to email your System Info to your Support technician.', 'send-system-info'); ?></p>
+</header>
 <form action="" method="post" enctype="multipart/form-data">
 	<table class="form-table ssi-email-form">
 		<tr>
@@ -26,5 +30,5 @@
 			</td>
 		</tr>
 	</table>
-	<?php submit_button( __( 'Send Email', 'send-system-info' ) , 'secondary' ) ?>
+	<?php submit_button( __( 'Send Email', 'send-system-info' ) , 'primary' ) ?>
 </form>

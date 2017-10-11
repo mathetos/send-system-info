@@ -4,7 +4,7 @@
  * Plugin URI: https://www.mattcromwell.com
  * Description: Displays System Info for debugging.  This info can be emailed and/or displayed to support personnel via unique URL.
  * Version: 1.2
- * Author: webdevmattcrom
+ * Author: Matt Cromwell
  * Author URI: https://www.mattcromwell.com
  * License: GPLv2+
  * textdomain: send-system-info

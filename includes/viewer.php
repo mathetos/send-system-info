@@ -21,9 +21,12 @@ class Send_System_Info_Viewer {
 		$value = get_option( 'system_info_remote_url' );
 		$url   = home_url() . '/?system_info=' . $value;
 		?>
-		<p><?php _e( 'Users with this URL can view a plain-text version of your System Info.<br />This link can be handy in support forums, as access to this information can be removed after you receive the help you need.<br />Generating a new URL will safely void access to all who have the existing URL.', 'send-system-info' ) ?></p>
-		<p><input type="text" readonly="readonly" class="ssi-url ssi-url-text" onclick="this.focus();this.select()" value="<?php echo esc_url( $url ) ?>" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>" />&nbsp;&nbsp;<a href="<?php echo esc_url( $url ) ?>" target="_blank" class="ssi-tiny ssi-url-text-link"><?php _e( 'test url', 'send-system-info' ) ?></a></p>
-		<p class="submit">
+        <header>
+            <h3 class="ssi-remote-title"><?php _e( 'Remote Viewing', 'send-system-info' ) ?></h3>
+            <p><?php _e( 'Users with this URL can view a plain-text version of your System Info.<br />This link can be handy in support forums, as access to this information can be removed after you receive the help you need.<br />Generating a new URL will safely void access to all who have the existing URL.', 'send-system-info' ) ?></p>
+        </header>
+
+		<p><input type="text" readonly="readonly" class="ssi-url ssi-url-text" onclick="this.focus();this.select()" value="<?php echo esc_url( $url ) ?>" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>" />&nbsp;&nbsp;<a href="<?php echo esc_url( $url ) ?>" target="_blank" class="button-secondary"><?php _e( 'Test URL', 'send-system-info' ) ?></a>
 			<input type="submit" onClick="return false;" class="button-secondary" name="generate-new-url" value="<?php _e( 'Generate New URL', 'send-system-info' ) ?>" />
 		</p>
 		<?php

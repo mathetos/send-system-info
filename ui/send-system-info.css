@@ -2,26 +2,25 @@
  * Styles for Send System Info Plugin
  */
 
-h2.ssi-title {
+h1.ssi-title {
 	margin-bottom: 1em;
 }
 
-.instructions {
-	margin-top: 0;
+.wrap header p {
+	font-size: 1.2em;
+	width: 60rem;
+	opacity: 0.7;
 }
 
-#ssi-textarea {
+#template textarea#ssi-textarea {
 	height: 500px;
+	width: 100%;
+    max-width: 60rem;
+	margin-bottom: .5em;
 }
 
 .ssi-email-form .description {
 	font-weight: normal;
-}
-
-#send-system-info-email-message.ssi-email-textarea {
-	width: 50%;
-	height: 200px;
-	margin-bottom: .5em;
 }
 
 input[type="text"].ssi-url {
