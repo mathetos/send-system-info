@@ -5,8 +5,8 @@
  *
  * @package     SSI
  * @subpackage  Classes/Email
- * @author      John Regan
- * @since       1.0
+ * @author      Matt Cromwell
+ * @since       1.3
  */
 
 class Send_System_Info_Email {
