@@ -1,9 +1,9 @@
 === Send System Info ===
-Contributors: johnregan3
-Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BAG2XC69ZYADQ
+Contributors: webdevmattcrom, shelob9, benmeredithgmailcom
+Donate Link: https://www.paypal.me/MattCromwell
 Tags: support, system, version, php, php version,
-Requires at least: 3.0.1
-Tested up to: 3.9
+Requires at least: 4.2
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

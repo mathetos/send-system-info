@@ -1,17 +1,17 @@
 <?php
 /**
  * Plugin Name: Send System Info
- * Plugin URI: http://johnregan3.github.io/send-system-info
+ * Plugin URI: https://www.mattcromwell.com
  * Description: Displays System Info for debugging.  This info can be emailed and/or displayed to support personnel via unique URL.
- * Version: 1.1
- * Author: johnregan3
- * Author URI: http://johnregan3.me
+ * Version: 1.2
+ * Author: webdevmattcrom
+ * Author URI: https://www.mattcromwell.com
  * License: GPLv2+
  * textdomain: send-system-info
  */
 
 /**
- * Copyright (c) 2014 John Regan (http://johnregan3.me/)
+ * Copyright (c) 2017 Matt Cromwell (https://www.mattcromwell.com)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2 or, at
