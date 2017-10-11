@@ -19,6 +19,10 @@ h1.ssi-title {
 	margin-bottom: .5em;
 }
 
+table.form-table.ssi-email-form {
+	max-width: 60rem;
+}
+
 .ssi-email-form .description {
 	font-weight: normal;
 }

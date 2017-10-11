@@ -17,9 +17,8 @@
 		    elseif($_GET["tab"] == "send-as-url") {
 			    $active_tab = "send-as-url";
 		    }
-		    else {
-			    $active_tab = "send-as-text";
-            }
+	    } else {
+		    $active_tab = "send-as-text";
 	    }
 	    ?>
         <h2 class="nav-tab-wrapper">
@@ -40,25 +39,13 @@
 function ssi_display_tab_content() {
         ob_start();
         echo '<div id="template">';
+	    $path = SSI_VIEWS_DIR . 'send-as-text-page.php';
 
-		if($_GET["tab"] == "send-as-text") { ?>
-            <header>
-                <h3 class="ssi-text-title"><?php _e( 'Send as Text', 'send-system-info' ) ?></h3>
-                <p><?php echo __('Here you can copy your System Info by clicking in the text area. Or download your System Info as a text file with the button.', 'send-system-info'); ?></p>
-            </header>
-            <form action="<?php echo esc_url( get_admin_url( 'admin-ajax.php' ) ); ?>" method="post" enctype="multipart/form-data" >
-                <input type="hidden" name="action" value="download_system_info" />
-                <p class="submit">
-                    <input type="submit" class="button-primary" value="<?php _e( 'Download System Info as Text File', 'send-system-info' ) ?>" />
-                </p>
-                <div>
-                            <textarea readonly="readonly" onclick="this.focus();this.select()" id="ssi-textarea" name="send-system-info-textarea" title="<?php _e( 'To copy the System Info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'send-system-info' ); ?>">
-                            <?php //Non standard indentation needed for plain-text display ?>
-                            <?php echo esc_html( Send_System_Info_Plugin::display() ) ?>
-                            </textarea>
-                </div>
-            </form>
-        <?php
+		if($_GET["tab"] == "send-as-text") {
+
+            $path = apply_filters( 'ssi_send_as_text_page_path', $path );
+
+            include( $path );
 		}
         elseif($_GET["tab"] == "send-as-email") { ?>
             <?php Send_System_Info_Email::email_form_section() ?>
@@ -67,6 +54,8 @@ function ssi_display_tab_content() {
         elseif($_GET["tab"] == "send-as-url") { ?>
             <?php Send_System_Info_Viewer::remote_viewing_section() ?>
         <?php
+        } else {
+			include( $path );
         }
         echo '</div>';
         $output = ob_get_clean();
@@ -74,5 +63,3 @@ function ssi_display_tab_content() {
 		return $output;
 
 }
-
-//add_action('admin_init', 'ssi_display_tab_content');
