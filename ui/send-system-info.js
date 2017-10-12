@@ -12,9 +12,11 @@
 				url : systemInfoAjax.ajaxurl,
 				data : { action : 'regenerate_url' },
 				success : function( response ) {
+                    $( '.ssi-url-text' ).removeClass( 'delete' );
                     $( '.ssi-url-text' ).addClass( 'generate' );
 				    $( '.ssi-url-text' ).val( response );
 					$( '.ssi-url-text-link' ).attr( 'href', response );
+
 				},
 				error : function( j, t, e ) {
 					console.log( "Send System Info Error: " + j.responseText );
@@ -34,6 +36,8 @@
                 url : systemInfoAjax.ajaxurl,
                 data : { action : 'delete_ssi_url' },
                 success : function( response ) {
+                    $( '.ssi-url-text' ).removeClass( 'generate' );
+                    $( '.ssi-url-text' ).addClass( 'delete' );
                     $( '.ssi-url-text' ).val('');
                     $( '.ssi-url-text-link' ).attr( 'href', '' );
                 },
