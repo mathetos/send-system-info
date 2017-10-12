@@ -12,7 +12,8 @@
 				url : systemInfoAjax.ajaxurl,
 				data : { action : 'regenerate_url' },
 				success : function( response ) {
-					$( '.ssi-url-text' ).val( response );
+                    $( '.ssi-url-text' ).addClass( 'generate' );
+				    $( '.ssi-url-text' ).val( response );
 					$( '.ssi-url-text-link' ).attr( 'href', response );
 				},
 				error : function( j, t, e ) {

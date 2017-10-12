@@ -33,6 +33,36 @@ input[type="text"].ssi-url {
 	color: #444;
 }
 
-.ssi-tiny {
-	font-size: .8em;
+@-webkit-keyframes generate {
+    0% {
+        background-color: #66BB6A;
+        opacity:1;
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+.generate {
+    -webkit-animation-name: generate;
+    -webkit-animation-duration: 900ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes delete {
+    0% {
+        background-color: #dd5d5f;
+        opacity:1;
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+.delete {
+    -webkit-animation-name: delete;
+    -webkit-animation-duration: 900ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
 }
