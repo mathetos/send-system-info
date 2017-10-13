@@ -88,8 +88,13 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function enqueue_js() {
+		$ajax_params = array(
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			'ajax_nonce' => wp_create_nonce('generate-ssi'),
+		);
+
 		wp_register_script( 'ssi-script', plugins_url( '/ui/send-system-info.js', __FILE__ ), array( 'jquery'), mt_rand(), false );
-		wp_localize_script( 'ssi-script', 'systemInfoAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'ssi-script', 'systemInfoAjax', $ajax_params );
 		wp_enqueue_script( 'ssi-script' );
 	}
 
@@ -102,7 +107,7 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function enqueue_css() {
-		wp_enqueue_style( 'ssi-style', plugins_url( '/ui/send-system-info.css', __FILE__ ) );
+		wp_enqueue_style( 'ssi-style', plugins_url( '/ui/send-system-info.css', __FILE__ ), array(), mt_rand() );
 	}
 
 	/**
@@ -305,13 +310,18 @@ class Send_System_Info_Plugin {
 	 */
 	static function generate_url() {
 
-		$value = wp_generate_password(rand(12,24), true, false);
+		check_ajax_referer( 'generate-ssi', 'security' );
 
-		update_option( 'system_info_remote_url', $value );
+		$generate = wp_generate_password( rand(12,24), false, false );
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		$value = esc_attr( $generate );
+
+		if ( !empty( $value ) && defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( 'update_plugins' ) ) {
+
+			update_option( 'system_info_remote_url', $value );
 			$output = home_url() . '/?system_info=' . $value;
 			wp_send_json( $output );
+
 		}
 	}
 
@@ -325,7 +335,9 @@ class Send_System_Info_Plugin {
 
 	static function delete_ssi_url() {
 
-		delete_option( 'system_info_remote_url' );
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( 'update_plugins' ) ) {
+			delete_option( 'system_info_remote_url' );
+		}
 
 	}
 

@@ -20,6 +20,7 @@ class Send_System_Info_Viewer {
 	static function remote_viewing_section() {
 		$value = get_option( 'system_info_remote_url' );
 		$url   = home_url() . '/?system_info=' . $value;
+
 		?>
         <header>
             <h3 class="ssi-remote-title"><?php _e( 'Remote Viewing', 'send-system-info' ) ?></h3>
