@@ -51,7 +51,7 @@ class Send_System_Info_Viewer {
 		$value       = get_option( 'system_info_remote_url' );
 
 		echo '<pre>';
-		if ( $query_value == $value ) {
+		if ( hash_equals($query_value, $value) ) {
 			echo esc_html( Send_System_Info_Plugin::display() );
 			exit();
 		} else {
