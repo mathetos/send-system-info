@@ -304,15 +304,11 @@ class Send_System_Info_Plugin {
 	 * @return void
 	 */
 	static function generate_url() {
-		$alphabet    = 'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
-		$value       = array();
-		$alphaLength = strlen( $alphabet ) - 1;
-		for ( $i = 0; $i < 32; $i++ ) {
-			$n     = rand( 0, $alphaLength );
-			$value[] = $alphabet[$n];
-		}
-		$value = implode( $value );
+
+		$value = wp_generate_password(rand(12,24), true, false);
+
 		update_option( 'system_info_remote_url', $value );
+
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			$output = home_url() . '/?system_info=' . $value;
 			wp_send_json( $output );
