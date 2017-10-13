@@ -39,23 +39,23 @@
 function ssi_display_tab_content() {
         ob_start();
         echo '<div id="template">';
-        $tab = ( !empty($_GET["tab"]) ? $_GET["tab"] : 'send-as-text' );
-
 	    $path = SSI_VIEWS_DIR . 'send-as-text-page.php';
 
-		if( $tab == "send-as-text") {
+		if($_GET["tab"] == "send-as-text") {
 
             $path = apply_filters( 'ssi_send_as_text_page_path', $path );
 
             include( $path );
 		}
-        elseif( $tab == "send-as-email") { ?>
+        elseif($_GET["tab"] == "send-as-email") { ?>
             <?php Send_System_Info_Email::email_form_section() ?>
         <?php
 		}
-        elseif( $tab == "send-as-url") { ?>
+        elseif($_GET["tab"] == "send-as-url") { ?>
             <?php Send_System_Info_Viewer::remote_viewing_section() ?>
         <?php
+        } else {
+			include( $path );
         }
         echo '</div>';
         $output = ob_get_clean();
